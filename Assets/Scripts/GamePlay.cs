@@ -16,11 +16,13 @@ public class GamePlay : MonoBehaviour
     private int[] markGrid;
     private int turnCount=0;
     [SerializeField] GameObject WinScrene;
+    [SerializeField] GameObject TurnScrene;
     [SerializeField] GameObject DrawScrene;
     [SerializeField] TextMeshProUGUI TextWin;
     // Start is called before the first frame update
     void Start()
     {
+        turn();
         markGrid = new int[9];
         for (int i = 0; i < 9; i++)
         {
@@ -32,6 +34,11 @@ public class GamePlay : MonoBehaviour
     void Update()
     {
         
+    }
+    private void turn()
+    {
+        TurnScrene.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void OnClickBtn(int num)
@@ -213,5 +220,18 @@ public class GamePlay : MonoBehaviour
     {
         //Application.Quit();
     }
-
+    public void X()
+    {
+        
+        Time.timeScale = 1f;
+        whoseTurn = 1;
+        TurnScrene.SetActive(false);
+    }
+    public void O()
+    {
+      
+        Time.timeScale = 1f;
+        whoseTurn = 0;
+        TurnScrene.SetActive(false);
+    }
 }

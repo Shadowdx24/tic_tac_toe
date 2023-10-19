@@ -1664,6 +1664,7 @@ MonoBehaviour:
   - {fileID: 1623639130}
   - {fileID: 1266035630}
   WinScrene: {fileID: 353655042}
+  TurnScrene: {fileID: 1191922999}
   DrawScrene: {fileID: 1433789882}
   TextWin: {fileID: 1392328249}
 --- !u!1 &705507993
@@ -2878,7 +2879,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1366259648}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 701227187}
+        m_TargetAssemblyTypeName: GamePlay, Assembly-CSharp
+        m_MethodName: X
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1366259648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5240,7 +5253,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2138739309}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 701227187}
+        m_TargetAssemblyTypeName: GamePlay, Assembly-CSharp
+        m_MethodName: O
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2138739309
 MonoBehaviour:
   m_ObjectHideFlags: 0

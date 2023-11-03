@@ -19,6 +19,7 @@ public class GamePlay : MonoBehaviour
     [SerializeField] GameObject TurnScrene;
     [SerializeField] GameObject DrawScrene;
     [SerializeField] TextMeshProUGUI TextWin;
+    private int PlayerSide;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,7 +69,10 @@ public class GamePlay : MonoBehaviour
             } 
         }
         changeTurn();
-        
+        if(whoseTurn!=PlayerSide)
+        {
+            ClickAi();        
+        }
     }
 
     private void changeTurn()
@@ -81,6 +85,8 @@ public class GamePlay : MonoBehaviour
         { 
             whoseTurn = 0;
         }
+
+      
        // CheckWin();
     }
     private bool CheckWin()
@@ -225,6 +231,7 @@ public class GamePlay : MonoBehaviour
         
         Time.timeScale = 1f;
         whoseTurn = 1;
+        PlayerSide=whoseTurn;
         TurnScrene.SetActive(false);
     }
     public void O()
@@ -232,6 +239,21 @@ public class GamePlay : MonoBehaviour
       
         Time.timeScale = 1f;
         whoseTurn = 0;
+        PlayerSide=whoseTurn;
         TurnScrene.SetActive(false);
+    }
+
+    private void ClickAi()
+    {
+        bool found=false;
+        while (found==false)
+        {
+            int random = Random.Range(0,9);
+            if (GridButtons[random].interactable == true)
+            {
+                GridButtons[random].onClick.Invoke();
+                found = true;
+            }
+        }
     }
 }

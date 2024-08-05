@@ -20,6 +20,7 @@ public class GamePlay : MonoBehaviour
     [SerializeField] GameObject DrawScrene;
     [SerializeField] TextMeshProUGUI TextWin;
     private int PlayerSide;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -36,16 +37,18 @@ public class GamePlay : MonoBehaviour
     {
         
     }
+
     private void turn()
     {
         TurnScrene.SetActive(true);
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
     }
 
     public void OnClickBtn(int num)
     {
         GridButtons[num].interactable = false;
         turnCount++;
+       
         if (whoseTurn == 0) 
         {
             GridButtons[num].GetComponentInChildren<TextMeshProUGUI>().text = "O";
@@ -57,18 +60,31 @@ public class GamePlay : MonoBehaviour
             GridButtons[num].GetComponentInChildren<TextMeshProUGUI>().text = "X";
             markGrid[num] = 1;
         }
-        if (turnCount>=5)
+
+        if (turnCount >= 9)
         {
-            CheckWin();
-        }
-        if(turnCount>=9)
-        {
-            if (CheckWin()==false)
+            if (CheckWin() == false)
             {
                 onDraw();
-            } 
+                return;
+            }
+            else
+            {
+                onWin();
+                return;
+            }
         }
+        else if (turnCount >= 5)
+        {
+            if (CheckWin())
+            {
+                onWin();
+                return;
+            }
+        }
+    
         changeTurn();
+       
         if(whoseTurn!=PlayerSide)
         {
             ClickAi();        
@@ -81,7 +97,7 @@ public class GamePlay : MonoBehaviour
         {
             whoseTurn = 1;
         }
-        else if(whoseTurn==1) 
+        else if(whoseTurn == 1) 
         { 
             whoseTurn = 0;
         }
@@ -89,6 +105,7 @@ public class GamePlay : MonoBehaviour
       
        // CheckWin();
     }
+
     private bool CheckWin()
     {
         if (markGrid[0] + markGrid[1] + markGrid[2] == 3 * whoseTurn)
@@ -101,7 +118,7 @@ public class GamePlay : MonoBehaviour
             {
                 Debug.Log("Player2 Win");
             }
-            onWin();
+
             return true;
         }
         else if (markGrid[3] + markGrid[4] + markGrid[5] == 3 * whoseTurn)
@@ -114,7 +131,7 @@ public class GamePlay : MonoBehaviour
             {
                 Debug.Log("Player2 Win");
             }
-            onWin();
+
             return true;
         }
         else if (markGrid[6] + markGrid[7] + markGrid[8] == 3 * whoseTurn)
@@ -127,7 +144,7 @@ public class GamePlay : MonoBehaviour
             {
                 Debug.Log("Player2 Win");
             }
-            onWin();
+
             return true;
         }
         else if (markGrid[0] + markGrid[3] + markGrid[6] == 3 * whoseTurn)
@@ -140,7 +157,7 @@ public class GamePlay : MonoBehaviour
             {
                 Debug.Log("Player2 Win");
             }
-            onWin();
+
             return true;
         }
         else if (markGrid[1] + markGrid[4] + markGrid[7] == 3 * whoseTurn)
@@ -153,7 +170,7 @@ public class GamePlay : MonoBehaviour
             {
                 Debug.Log("Player2 Win");
             }
-            onWin();
+
             return true;
         }
         else if (markGrid[2] + markGrid[5] + markGrid[8] == 3 * whoseTurn)
@@ -166,7 +183,7 @@ public class GamePlay : MonoBehaviour
             {
                 Debug.Log("Player2 Win");
             }
-            onWin();
+
             return true;
         }
         else if (markGrid[0] + markGrid[4] + markGrid[8] == 3 * whoseTurn)
@@ -179,7 +196,7 @@ public class GamePlay : MonoBehaviour
             {
                 Debug.Log("Player2 Win");
             }
-            onWin();
+
             return true;
         }
         else if (markGrid[2] + markGrid[4] + markGrid[6] == 3 * whoseTurn)
@@ -192,16 +209,18 @@ public class GamePlay : MonoBehaviour
             {
                 Debug.Log("Player2 Win");
             }
-            onWin();
+
             return true;
         }
+
         return false;
     }
 
     private void onWin()
     {
         WinScrene.SetActive(true);
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
+       
         if (whoseTurn == 0)
         {
             TextWin.text = "Player1:O Win";
@@ -211,32 +230,35 @@ public class GamePlay : MonoBehaviour
             TextWin.text = "Player2:X Win";
         }
     }
+
     private void onDraw()
     {
         DrawScrene.SetActive(true);
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
     }
+
     public void Restart()
     {
         SceneManager.LoadScene(0);
         Time.timeScale = 1f;
         WinScrene.SetActive(false);
     }
+
     public void Exit()
     {
         //Application.Quit();
     }
+
     public void X()
-    {
-        
+    {   
         Time.timeScale = 1f;
         whoseTurn = 1;
         PlayerSide=whoseTurn;
         TurnScrene.SetActive(false);
     }
+
     public void O()
-    {
-      
+    { 
         Time.timeScale = 1f;
         whoseTurn = 0;
         PlayerSide=whoseTurn;
@@ -245,10 +267,10 @@ public class GamePlay : MonoBehaviour
 
     private void ClickAi()
     {
-        bool found=false;
-        while (found==false)
+        bool found = false;
+        while (found == false)
         {
-            int random = Random.Range(0,9);
+            int random = Random.Range(0,8);
             if (GridButtons[random].interactable == true)
             {
                 GridButtons[random].onClick.Invoke();
